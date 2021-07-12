@@ -1,0 +1,32 @@
+
+class Solution {
+    public boolean checkBalance(char a, char b){
+        if (a == '(' && b == ')') return true;
+        if (a == '[' && b == ']') return true;
+        if (a == '{' && b == '}') return true;
+        return false;
+    }
+    public boolean isValid(String s) {
+        Stack<Character> pStack = new Stack();
+        char[] chars = s.toCharArray();
+        for(int i = 0; i < chars.length;i++){
+            if (chars[i] == '(' ||
+                    chars[i] == '{' || 
+                    chars[i] == '['){
+                pStack.push(chars[i]);
+          
+            } else if (chars[i] == ')' || 
+                      chars[i] == ']' ||
+                      chars[i] == '}'){
+                if (pStack.isEmpty() || checkBalance(pStack.lastElement(), chars[i]) == false){
+                   
+                    return false;
+                } else {
+                    pStack.pop();
+                  
+                }
+            }
+        }
+        return pStack.isEmpty();
+    }
+}
